@@ -1,0 +1,39 @@
+info:
+  name: Metabase GreptimeDB Driver
+  version: 0.0.6
+  description: Allows Metabase to connect to GreptimeDB databases.
+contact-info:
+  name: GreptimeDB
+  address: https://github.com/greptimeteam/metabase-greptimedb-driver
+driver:
+  name: greptimedb
+  display-name: GrepTimeDB
+  lazy-load: true
+  parent: sql-jdbc
+  connection-properties:
+    - name: host
+      default: "localhost"
+    - merge:
+        - port
+        - default: 4002
+    - name: user
+      display-name: Username
+      required: false
+    - name: password
+      display-name: Password
+      required: false
+    - name: dbname
+      display-name: Database Name
+      placeholder: public
+      default: public
+    - name: scan-all-databases
+      display-name: Scan all databases
+      type: boolean
+      default: true
+    - ssl
+    - advanced-options-start
+    - default-advanced-options
+  connection-properties-include-tunnel-config: false
+init:
+  - step: load-namespace
+    namespace: metabase.driver.greptimedb
